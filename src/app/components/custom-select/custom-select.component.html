@@ -1,0 +1,9 @@
+<div>
+	<button
+	  type="button"
+	  *ngFor="let option of options"
+	  (click)="optionSelect(option);">
+	  {{option.title}}
+	</button>
+	<div class="dropdown-item" *ngIf="!options.length">No items for select</div>
+</div>

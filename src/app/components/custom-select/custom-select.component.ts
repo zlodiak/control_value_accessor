@@ -1,10 +1,6 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
-interface selectOption {
-  title: string;
-  value: string
-}
 
 @Component({
   selector: 'custom-select',
@@ -20,30 +16,26 @@ interface selectOption {
 })
 export class CustomSelectComponent implements OnInit {
 
-	@Input() options: selectOption[] = [];
+  punkts = [
+    'one',
+    'two',
+    'three',
+    'four',
+  ];
 
-  open: boolean = false;
-
-  constructor() {
-  }
+  option = null;
 
   ngOnInit() {
-    console.log(this.options)
   }
 
-  optionSelect() {
-
+  optionSelect(i) {
+    this.option = i;
+    this.onChange(i);
   }
 
   writeValue(value) {
-    if (!value || typeof value !== 'string') {
-      return
-    }
-    const selectedEl = this.options.find(el => el.value === value);
-    if (selectedEl) {
-      this.selectedOption = selectedEl;
-      this.onChange(this.selectedOption.value);
-    }
+    console.log('writeValue', value);
+    this.option = value;
   }
 
   onChange: any = () => {

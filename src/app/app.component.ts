@@ -8,39 +8,26 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from 
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+ 
+  myForm: FormGroup;
 
-	public signUpForm: FormGroup = null;
-	
-  public contactTypes = [
-    {title: 'tphone', value: 'vPhone'},
-    {title: 'te-mail', value: 'vE-mail'},
-    {title: 'tskype', value: 'vSkype'}
-  ];	
-
-  public get contacts() {
-    return <FormArray>this.signUpForm.get('contacts');
-  }  
-
-  constructor(private fb: FormBuilder) {
-
-  }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
-    this.signUpForm = this.fb.group({
-      user_name: [''],
-      contacts: this.fb.array([])
+    this.myForm = this.fb.group({
+        "name": ["Tom"],
+        "option": [2],
+    });
+            
+    console.log(this.myForm);
+
+    this.myForm.get('option').valueChanges.subscribe(data => {
+      console.log('in app component changed option', data);
     });
 
-    this.contactTypes.forEach(item => {
-      (<FormArray>this.signUpForm.get('contacts')).push(
-        this.fb.group({
-          title: [item.title],
-          value: ['item.value']
-        })
-      );
-    });
-
-    console.log(this.signUpForm);  
+    this.myForm.get('name').valueChanges.subscribe(data => {
+      console.log('in app component changed name', data);
+    });    
   }
 
 }

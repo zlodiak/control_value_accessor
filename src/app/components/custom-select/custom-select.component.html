@@ -1,9 +1,13 @@
+<pre>
+	selected: {{ option }}
+</pre>
+
 <div>
 	<button
 	  type="button"
-	  *ngFor="let option of options"
-	  (click)="optionSelect(option);">
-	  {{option.title}}
+	  *ngFor="let punkt of punkts; index as i"
+	  [ngClass]="{active: option === i}"
+	  (click)="optionSelect(i);">
+	  {{ i }} - {{punkt}} 
 	</button>
-	<div class="dropdown-item" *ngIf="!options.length">No items for select</div>
 </div>
